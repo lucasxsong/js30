@@ -31,20 +31,70 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const fifteen = inventors.filter(inventor => (inventor.year >= 1500 && inventor.year < 1600))
+      //else {
+      //  return false;
+      //}
+      // no need to return true because the console will 
+      console.table(fifteen);
 
-    // Array.prototype.map()
+    // Array.prototype.map() always returns same amount of items you give it
     // 2. Give us an array of the inventors' first and last names
+    const fullNames = inventors.map(inventor => `${inventor.first} ${inventor.last}`);
+    console.log(fullNames);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    // bubble sort that moves them up and down based on how
+    // const orderedBig = inventors.sort(function(a, b) {
+    //   if (a.year > b.year) {
+    //     return 1;
+    //   }
+    //   else {
+    //     return -1;
+    //   }
+    // });
+
+    const ordered = inventors.sort((a,b) => a.year > b.year ? 1 : -1);
+    
+    // these two if else loops do the same thing but once takes advantage of such "ternary" statement 
+
+    console.table(ordered);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+    // reduce is a cleaner way to use a forloop to increment 
+
+    const totalYears = inventors.reduce((total, inventor) => {
+        return total + (inventor.passed - inventor.year);
+    }, 0);
+
+    console.log(totalYears);
+
 
     // 5. Sort the inventors by years lived
+    const oldest = inventors.sort(function(a, b) {
+      const lastGuy = a.passed - a.year;
+      const nextGuy = a.passed - b.year;
+      return lastGuy > nextGuy ? -1 : 1; //ternary statement
+    });
+    console.table(oldest);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
-    // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris 
+    // first find the div boxes that have the links
+    // then find the liks inside the div boxes
+    // can call queryselector against any existing element
+    const category = document.querySelector('.mw-category'); // searches for div with name
+    const links = Array.from(category.querySelectorAll('a'));
+    // takes out 
+    // typing out links will print out the nodes of the links
+    // filter out to the ones that include "de"
+    // query selector will return a node list
+
+    const de = links
+        .map(link => link.textContent)
+        .filter(streetName => streetName.includes('de'));
 
 
     // 7. sort Exercise
