@@ -14,11 +14,15 @@
   ctx.strokeStyle = '#BADA55';
   ctx.lineJoin = 'round';
   ctx.lineCap = 'round';
+  ctx.lineWidth = 20;
+  ctx.globalCompositeOperation = 'multiply';
 
   let isDrawing = false; //flag to set it to true when the clicker is clicked
 
   let lastX = 0;
   let lastY = 0;
+  let hue = 0;
+  let direction = true;
 
   // you need to have a starting x and why to create the line
 
@@ -27,7 +31,8 @@
     // e is for event
     console.log(e);
     // listen to mouse movement 
-
+    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+   // ctx.lineWidth = lineWidth;
     ctx.beginPath();
     // start from
     ctx.moveTo(lastX, lastY);
@@ -35,6 +40,19 @@
     ctx.lineTo(e.offsetX, e.offsetY);
     ctx.stroke();
     [lastX, lastY] = [e.offsetX, e.offsetY];
+    hue ++;
+    if (hue >= 360) {
+      hue = 0;
+    }
+    if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
+      direction = !direction;
+    }
+    if (direction) {
+      ctx.lineWidth++;
+    }
+    else {
+      ctx.lineWidth--;
+    }
   }
 
   canvas.addEventListener('mousedown', (e) => {
