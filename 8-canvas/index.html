@@ -5,7 +5,10 @@
   <title>HTML5 Canvas</title>
 </head>
 <body>
-<canvas id="draw" width="800" height="800"></canvas>
+    
+<div class = "canvas" >  
+<canvas id="draw" width="400" height="100"></canvas>
+</div>
 <script>
   const canvas = document.querySelector('#draw');
   const ctx = canvas.getContext('2d');
@@ -69,7 +72,14 @@ canvas.addEventListener('mouseout', () => isDrawing = false);
 <style>
   html, body {
     margin: 0;
+    font-family: 'helvetica neue';
   }
+  .greeting {
+    font-size: 24px;
+    font-weight: 500;
+    padding-top: 300px;
+    padding-left: 10px;
+}
 </style>
 
 </body>
